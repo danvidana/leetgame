@@ -14,4 +14,4 @@ const GameRecordSchema  = Schema ({
     }
 });
 
-module.exports = mongoose.model('tasks',GameRecordSchema);
+module.exports = mongoose.model('gameRecords',GameRecordSchema);
