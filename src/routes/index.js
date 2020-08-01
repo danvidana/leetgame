@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const Task = require('../model/gameRecord');
+const GameRecord = require('../model/gameRecord');
 const db = require("./database");
 
 // Nos regresaria las tareas guardadas en la BD
 router.get('/', async (req,res) =>{
-const tasks = await Task.find();
-res.render('index', {tasks});
+const gameRecords = await GameRecord.find();
+res.render('index', {gameRecords});
 });
 
 router.get('/new-game',   async(req,res) =>{
@@ -20,16 +20,16 @@ router.get('/login',   async(req,res) =>{
 
 // Ruta que nos permita agregar nuevas tareas que vienen desde un metodo post
 router.post('/add', async (req,res) =>{
-const task = new Task(req.body);
-await task.save();
+const gameRecords = new GameRecord(req.body);
+await GameRecords.save();
 res.redirect('/');
 });
 
 // Ruta para editar los datos
 
 router.get('/edit/:id',   async(req,res) =>{
-const task = await Task.findById(req.params.id);
-res.render('edit', {task});
+const gameRecord = await GameRecord.findById(req.params.id);
+res.render('edit', {gameRecord});
 })
 
 
@@ -37,7 +37,7 @@ res.render('edit', {task});
 
 router.post('/edit/:id',   async(req,res) =>{
     var  id = req.params.id;
-    await Task.update({_id: id}, req.body);
+    await GameRecord.update({_id: id}, req.body);
     res.redirect('/');
     })
 
@@ -46,7 +46,7 @@ router.post('/edit/:id',   async(req,res) =>{
 
 router.get('/delete/:id',  async (req,res) =>{
     var id = req.params.id;
-    await Task.remove({_id: id});
+    await GameRecord.remove({_id: id});
     res.redirect('/');
 })
 
