@@ -10,7 +10,11 @@ res.render('index', {tasks});
 
 router.get('/new-game',   async(req,res) =>{
     res.render('new-game');
-    })
+})
+
+router.get('/login',   async(req,res) =>{
+    res.render('login-signing');
+})
 
 
 // Ruta que nos permita agregar nuevas tareas que vienen desde un metodo post
