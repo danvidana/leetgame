@@ -3,20 +3,20 @@ const router = express.Router();
 const GameRecord = require('../model/gameRecord');
 const db = require('../database');
 
-// Nos regresaria las tareas guardadas en la BD
-router.get('/', async (req,res) =>{
-const gameRecords = await GameRecord.find();
-res.render('index', {gameRecords});
+// Ruta inicial a pantalla para hacer login o sign in
+router.get('/', (req,res) =>{
+    res.render('login'); 
 });
 
-router.get('/new-game',   async(req,res) =>{
+// Ruta de home donde se ven los gameRecords del usuario
+router.get('/home',   async(req,res) =>{
+    const gameRecords = await GameRecord.find();
+    res.render('home', {gameRecords}); 
+})
+
+router.get('/new-game', (req,res) =>{
     res.render('new-game');
 })
-
-router.get('/login',   async(req,res) =>{
-    res.render('login-signing');
-})
-
 
 // Ruta que nos permita agregar nuevas tareas que vienen desde un metodo post
 router.post('/add', async (req,res) =>{
@@ -76,7 +76,7 @@ router.post('/register', (req, res, next) => {
 
 
 router.get('/login', (req, res) => {
-    res.render('login', { user : req.user, error : req.flash('error')});
+    res.render('home', { user : req.user, error : req.flash('error')});
 });
 
 /*
