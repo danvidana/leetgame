@@ -20,9 +20,9 @@ router.get('/login',   async(req,res) =>{
 
 // Ruta que nos permita agregar nuevas tareas que vienen desde un metodo post
 router.post('/add', async (req,res) =>{
-const gameRecords = new GameRecord(req.body);
-await GameRecords.save();
-res.redirect('/');
+    const gameRecord = new GameRecord(req.body);
+    await gameRecord.save();
+    res.redirect('/');
 });
 
 // Ruta para editar los datos
@@ -52,7 +52,7 @@ router.get('/delete/:id',  async (req,res) =>{
 
 //login and signup
 router.get('/register', (req, res) => {
-    res.render('register', { });
+    res.render('register', {});
 });
 
 /*

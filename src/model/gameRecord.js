@@ -5,9 +5,9 @@ const Schema =  mongoose.Schema;
 const GameRecordSchema  = Schema ({
     title: String,
     userId: String,
-  //  time_played: new Date(),
+    timePlayed: Date,
     description: String, 
-  //  notes: Array<String>,
+    //notes: Array<String>,
     status: {
         type: Boolean,
         default: false
