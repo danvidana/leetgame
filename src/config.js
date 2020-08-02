@@ -4,6 +4,6 @@ dotenv.config();
 
 module.exports = {
     'port': process.env.PORT || 3000,
-    'db': process.env.MONGODB || "mongodb://localhost:27017/jwt-db",
+    'db': process.env.MONGODB || 'mongodb://localhost/jwt-db',
     'secret': process.env.SECRET || "1234567890abcd"
 };

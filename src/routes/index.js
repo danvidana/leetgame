@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const GameRecord = require('../model/gameRecord');
-//const db = require("./database");
+const db = require('../database');
 
 // Nos regresaria las tareas guardadas en la BD
 router.get('/', async (req,res) =>{
