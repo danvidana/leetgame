@@ -1,9 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const User = require("../model/User");
+<<<<<<< HEAD
 const jwt =  require('jsonwebtoken')
 const config = require('../config');
 const verifyToken = require("./verifyToken");
+=======
+//const jwt = require("jsonwebtoken");
+const config = require("../config");
+>>>>>>> master
 const path = require("path");
 const cookieParser = require("cookie-parser");
 
