@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const config = require('./config');
 
 mongoose.connect(config.db,{
@@ -6,5 +6,5 @@ mongoose.connect(config.db,{
     useUnifiedTopology: true
 
 })
-.then(db => console.log("Database is connected"))
-.catch(err => console.log("Err: ", err))
+.then(db => console.log("Database is connected database.js"))
+.catch(err => console.log("Error", err))

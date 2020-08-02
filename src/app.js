@@ -6,11 +6,6 @@ const cookieParser = require("cookie-parser");
 
 const app = express();
 
-// connection to  db
-mongoose.connect('mongodb://localhost/crud-mongo')
-        .then(db => console.log('db connected'))
-        .catch(err => console.log(err));
-
 // importing routes
 const indexRoutes = require('./routes/index');
 const { ppid } = require('process');
