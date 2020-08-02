@@ -51,13 +51,10 @@ router.get('/delete/:id',  async (req,res) =>{
     res.redirect('/');
 })
 
-<<<<<<< HEAD
-=======
 //login and signup
 router.get('/register', (req, res) => {
     res.render('register', {});
 });
->>>>>>> master
 
 /*
 router.post('/register', (req, res, next) => {
@@ -78,15 +75,11 @@ router.post('/register', (req, res, next) => {
 });
 */
 
-<<<<<<< HEAD
-
-=======
 /*
 router.get('/login', (req, res) => {
     res.render('home', { user : req.user, error : req.flash('error')});
 });
 */
->>>>>>> master
 
 /*
 router.post('/login', passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }), (req, res, next) => {
