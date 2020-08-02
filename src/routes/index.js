@@ -74,10 +74,11 @@ router.post('/register', (req, res, next) => {
 });
 */
 
-
+/*
 router.get('/login', (req, res) => {
     res.render('home', { user : req.user, error : req.flash('error')});
 });
+*/
 
 /*
 router.post('/login', passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }), (req, res, next) => {
