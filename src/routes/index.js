@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const GameRecord = require('../model/gameRecord');
-const db = require("./database");
+//const db = require("./database");
 
 // Nos regresaria las tareas guardadas en la BD
 router.get('/', async (req,res) =>{
@@ -55,6 +55,7 @@ router.get('/register', (req, res) => {
     res.render('register', { });
 });
 
+/*
 router.post('/register', (req, res, next) => {
     Account.register(new Account({ username : req.body.username }), req.body.password, (err, account) => {
         if (err) {
@@ -71,12 +72,14 @@ router.post('/register', (req, res, next) => {
         });
     });
 });
+*/
 
 
 router.get('/login', (req, res) => {
     res.render('login', { user : req.user, error : req.flash('error')});
 });
 
+/*
 router.post('/login', passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }), (req, res, next) => {
     req.session.save((err) => {
         if (err) {
@@ -85,6 +88,7 @@ router.post('/login', passport.authenticate('local', { failureRedirect: '/login'
         res.redirect('/');
     });
 });
+*/
 
 router.get('/logout', (req, res, next) => {
     req.logout();
