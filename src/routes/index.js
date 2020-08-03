@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const GameRecord = require('../model/gameRecord');
+
 const db = require('../database');
 
 // Ruta inicial a pantalla para hacer login o sign in
@@ -52,8 +53,38 @@ router.get('/delete/:id',  async (req,res) =>{
     res.redirect('/');
 })
 
-router.get('/logout', (req, res, next) => {
-    req.logout();
+//login and signup
+router.get('/register', (req, res) => {
+    res.render('register', {});
+});
+
+/*
+router.post('/register', (req, res, next) => {
+    Account.register(new Account({ username : req.body.username }), req.body.password, (err, account) => {
+        if (err) {
+          return res.render('register', { error : err.message });
+        }
+
+        passport.authenticate('local')(req, res, () => {
+            req.session.save((err) => {
+                if (err) {
+                    return next(err);
+                }
+                res.redirect('/');
+            });
+        });
+    });
+});
+*/
+
+/*
+router.get('/login', (req, res) => {
+    res.render('home', { user : req.user, error : req.flash('error')});
+});
+*/
+
+/*
+router.post('/login', passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }), (req, res, next) => {
     req.session.save((err) => {
         if (err) {
             return next(err);
@@ -61,5 +92,8 @@ router.get('/logout', (req, res, next) => {
         res.redirect('/');
     });
 });
+*/
+
+
 
 module.exports = router;
