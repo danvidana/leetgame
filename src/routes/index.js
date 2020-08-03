@@ -19,6 +19,11 @@ router.get('/new-game', (req,res) =>{
     res.render('new-game');
 })
 
+router.get('/game-continue/:id', async (req,res) =>{
+    const gameRecord = await GameRecord.findById(req.params.id);
+    res.render('game-continue', {gameRecord});
+})
+
 // Ruta que nos permita agregar nuevas tareas que vienen desde un metodo post
 router.post('/add', async (req,res) =>{
     const gameRecord = new GameRecord(req.body);
