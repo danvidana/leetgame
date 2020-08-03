@@ -1,4 +1,4 @@
-<%- include ("./partials/_header") %>
+<%- include ("./partials/_header", {gameRecordsCount: gameRecords.length}) %>
 
 
 <div class="container mt-5">
@@ -12,7 +12,7 @@
         <div class="buttons text-center">
             <button id="startStop" onclick="startStop()">Start</button>
             <button id="reset" onclick="reset()">Reset</button>
-            <button id="save" href="/saveTime/saveTime()">Save</button>
+            <button id="save" href="/saveTime/userId/saveTime()">Save</button>
 
         </div>
 
@@ -29,8 +29,14 @@
         <div class="labels-games">
             Time played
         </div>
-        <div class="text-label">
-            <%= gameRecord.description %>
+        <div id="time-played" class="text-label">
+            <%= timeString %>
+        </div>
+        <div class="labels-games">
+            Date Started
+        </div>
+        <div id="time-played" class="text-label">
+            <%= gameRecord.dateStarted %>
         </div>
 
     </div>

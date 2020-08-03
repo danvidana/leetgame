@@ -1,8 +1,18 @@
 const express = require('express');
 const router = express.Router();
 const GameRecord = require('../model/gameRecord');
+const jwt = require("jsonwebtoken");
+const config = require('../config');
 
 const db = require('../database');
+const verifyToken = require('../controllers/verifyToken');
+
+function secondsToTime(seconds) {
+    var timePlayed = new Date(0);
+    timePlayed.setSeconds(seconds); // specify value for SECONDS here
+    var timeString = timePlayed.toISOString().substr(11, 8);
+    return timeString;
+}
 
 // Ruta inicial a pantalla para hacer login o sign in
 router.get('/', (req,res) =>{
@@ -10,32 +20,62 @@ router.get('/', (req,res) =>{
 });
 
 // Ruta de home donde se ven los gameRecords del usuario
-router.get('/home',   async(req,res) =>{
-    const gameRecords = await GameRecord.find();
-    res.render('home', {gameRecords}); 
+router.get('/home', verifyToken, async(req,res) =>{
+    const token = req.cookies.token;
+    const decoded = jwt.verify(token,config.secret)
+    id = decoded.id;
+    var timesFormated = [];
+    const gameRecords = await GameRecord.find({userId: id});
+    console.log(gameRecords)
+    for (var i = 0; i < gameRecords.length; i++) {
+        timesFormated.push(secondsToTime(gameRecords[i].timePlayed));
+    }
+    res.render('home', {gameRecords, timesFormated}); 
 })
 
-router.get('/new-game', (req,res) =>{
-    res.render('new-game');
+router.get('/new-game', verifyToken, async (req,res) =>{
+    const token = req.cookies.token;
+    const decoded = jwt.verify(token,config.secret)
+    id = decoded.id;
+    const gameRecords = await GameRecord.find({userId: id});
+    res.render('new-game', {gameRecords});
 })
 
-router.get('/game-continue/:id', async (req,res) =>{
+router.get('/game-continue/:id', verifyToken, async (req,res) =>{const token = req.cookies.token;
+    const decoded = jwt.verify(token,config.secret)
+    id = decoded.id;
+    const gameRecords = await GameRecord.find({userId: id});
     const gameRecord = await GameRecord.findById(req.params.id);
-    res.render('game-continue', {gameRecord});
+    var timeString = secondsToTime(gameRecord.timePlayed);
+    res.render('game-continue', {gameRecord, gameRecords, timeString});
 })
 
 // Ruta que nos permita agregar nuevas tareas que vienen desde un metodo post
-router.post('/add', async (req,res) =>{
+router.post('/add-game', verifyToken, async (req,res) =>{
+    const token = req.cookies.token;
+    const decoded = jwt.verify(token,config.secret)
+    var id = decoded.id;
     const gameRecord = new GameRecord(req.body);
+    gameRecord.userId = id;
+    gameRecord.timePlayed = 0;
+    console.log(req.body)
+    gameRecord.estimatedCompletionTime = parseInt(req.body.estimatedCompletionTime)  * 360;
+    gameRecord.dateStarted = new Date();
     await gameRecord.save();
-    res.redirect('/');
+    res.redirect('/home');
 });
 
 // Ruta para editar los datos
 router.get('/edit/:id',   async(req,res) =>{
-const gameRecord = await GameRecord.findById(req.params.id);
-res.render('edit', {gameRecord});
+    const gameRecord = await GameRecord.findById(req.params.id);
+    res.render('edit', {gameRecord});
 })
+
+/*
+router.post('/saveTime/:time', async(req,res) => {
+    const gameRecord = await 
+})
+*/
 
 
 // Ruta para actualizar los datos

@@ -1,5 +1,3 @@
-
-
 //Define vars to hold time values
 let seconds = 0;
 let minutes = 0;

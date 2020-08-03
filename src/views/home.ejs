@@ -1,4 +1,5 @@
-<%- include ("./partials/_header") %>
+
+<%- include ("./partials/_header", {gameRecordsCount: gameRecords.length}) %>
 
 
 <div class="container mt-5">
@@ -33,10 +34,18 @@
                     <%= gameRecords[i].title %>
                 </div>
                 <div class="col">
-                    <%= gameRecords[i].timePlayed %>
+                    <%= timesFormated[i] %>
                 </div>
                 <div class="col">
-                    07/20/2020
+                    <% if (gameRecords[i].dateStarted) { %>
+                        <%= gameRecords[i].dateStarted.getMonth() + 1 %>
+                        /
+                        <%= gameRecords[i].dateStarted.getDate() %>
+                        /
+                        <%= gameRecords[i].dateStarted.getFullYear() %>
+                    <% }else { %>
+                        No start date
+                    <% } %>
                 </div>
                 <div class="col">
                     07/27/2020

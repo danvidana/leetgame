@@ -6,12 +6,10 @@ const GameRecordSchema  = Schema ({
     title: String,
     userId: String,
     timePlayed: Number,
-    description: String, 
-    //notes: Array<String>,
-    status: {
-        type: Boolean,
-        default: false
-    }
+    dateStarted: Date,
+    description: String,
+    genre: String,
+    estimatedCompletionTime: Number, 
 });
 
 module.exports = mongoose.model('gameRecords',GameRecordSchema);

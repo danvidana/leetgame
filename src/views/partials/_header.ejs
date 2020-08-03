@@ -28,11 +28,17 @@
               Playing
             </div>
             <div class="align-self-center logo-slogan-text">
-              5
+              <%= gameRecordsCount %>
             </div>
-            <div class="align-self-center text-white">
-              Games
-            </div>
+            <% if(gameRecordsCount != 1) { %>
+              <div class="align-self-center text-white">
+                Games
+              </div>
+            <% } else { %>
+              <div class="align-self-center text-white">
+                Game
+              </div>
+              <% } %>
           </div>
           
 

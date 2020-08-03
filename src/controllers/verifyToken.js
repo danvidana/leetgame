@@ -2,11 +2,11 @@ const jwt = require("jsonwebtoken");
 const config = require('../config');
 const cookieParser = require("cookie-parser");
 
- function verifyToken(req,res,next){
+function verifyToken(req,res,next) {
 
-const token = req.cookies.token || '';
+    const token = req.cookies.token;
 
-console.log("token" , token);
+    console.log("token" , token);
 
     if(!token){
         return res.redirect('/')
@@ -16,7 +16,7 @@ console.log("token" , token);
      const decoded = jwt.verify(token,config.secret)
      req.userId = decoded.id;
      next();
-    }
+    }   
 }
 
 module.exports = verifyToken;
