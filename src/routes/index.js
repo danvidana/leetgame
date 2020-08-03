@@ -31,7 +31,6 @@ router.post('/add', async (req,res) =>{
 });
 
 // Ruta para editar los datos
-
 router.get('/edit/:id',   async(req,res) =>{
 const gameRecord = await GameRecord.findById(req.params.id);
 res.render('edit', {gameRecord});
@@ -39,7 +38,6 @@ res.render('edit', {gameRecord});
 
 
 // Ruta para actualizar los datos
-
 router.post('/edit/:id',   async(req,res) =>{
     var  id = req.params.id;
     await GameRecord.update({_id: id}, req.body);
@@ -47,54 +45,12 @@ router.post('/edit/:id',   async(req,res) =>{
     })
 
 
-// Ruta que nos permita eliminar tareas
-
+// Ruta que nos permita eliminar gameRecords
 router.get('/delete/:id',  async (req,res) =>{
     var id = req.params.id;
     await GameRecord.remove({_id: id});
     res.redirect('/');
 })
-
-//login and signup
-router.get('/register', (req, res) => {
-    res.render('register', {});
-});
-
-/*
-router.post('/register', (req, res, next) => {
-    Account.register(new Account({ username : req.body.username }), req.body.password, (err, account) => {
-        if (err) {
-          return res.render('register', { error : err.message });
-        }
-
-        passport.authenticate('local')(req, res, () => {
-            req.session.save((err) => {
-                if (err) {
-                    return next(err);
-                }
-                res.redirect('/');
-            });
-        });
-    });
-});
-*/
-
-/*
-router.get('/login', (req, res) => {
-    res.render('home', { user : req.user, error : req.flash('error')});
-});
-*/
-
-/*
-router.post('/login', passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }), (req, res, next) => {
-    req.session.save((err) => {
-        if (err) {
-            return next(err);
-        }
-        res.redirect('/');
-    });
-});
-*/
 
 router.get('/logout', (req, res, next) => {
     req.logout();
