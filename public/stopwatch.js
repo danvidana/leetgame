@@ -60,14 +60,12 @@ function stopWatch(){
 
 }
 
-
-
 function startStop(){
 
     if(status === "stopped"){
 
         //Start the stopwatch (by calling the setInterval() function)
-        interval = window.setInterval(stopWatch, 1000);
+        interval = window.setInterval(stopWatch, 100);
         document.getElementById("startStop").innerHTML = "Stop";
         status = "started";
 
@@ -92,4 +90,11 @@ function reset(){
     document.getElementById("display").innerHTML = "00:00:00";
     document.getElementById("startStop").innerHTML = "Start";
 
+}
+
+function saveTime() {
+    if (status !== "stopped") {
+        console.log(seconds + (minutes * 60) + (hours * 360));
+        startStop();
+    }
 }

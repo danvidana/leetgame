@@ -58,6 +58,12 @@ router.get('/register', (req, res) => {
     res.render('register', {});
 });
 
+router.post('/add', async (req,res) =>{
+    const gameRecord = new GameRecord(req.body);
+    await gameRecord.save();
+    res.redirect('/');
+});
+
 /*
 router.post('/register', (req, res, next) => {
     Account.register(new Account({ username : req.body.username }), req.body.password, (err, account) => {
