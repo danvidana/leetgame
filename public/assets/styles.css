@@ -64,3 +64,22 @@
 }
 
 
+#display {
+    width: 200px;
+    height: 200px;
+    font-size: 3rem;
+    margin: 0 auto;
+    padding: 10% 0;
+    border: 2px black solid;
+    border-radius: 100px;
+}
+
+.game-image {
+    width: 100%;
+    padding: 0 10%;
+}
+
+.stopwatch-col {
+    background-color: #C4EDDE;
+    padding: 0;
+}

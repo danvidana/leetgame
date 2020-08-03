@@ -28,7 +28,7 @@
 
     <div class="card-container">
         <% for (var i =0; i < gameRecords.length; i++)  {     %>
-            <a class="card btn flex-row py-2 my-2 text-center">
+            <a href="/game-continue/<%= gameRecords[i]._id %>" class="card btn flex-row py-2 my-2 text-center">
                 <div class="col">
                     <%= gameRecords[i].title %>
                 </div>
