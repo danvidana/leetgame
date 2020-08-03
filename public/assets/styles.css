@@ -118,3 +118,25 @@
     border-top-left-radius: 0;
     border-top-right-radius: 0;
   }
+
+
+  /*  Small devices    */
+@media (max-width:599px) {
+
+    .new-game-button {
+        width: 75%;
+    }
+    .text-field {
+        width: 80%;
+        margin: auto;
+    }
+
+    .header-title{
+        font-size: 18px;
+    }
+
+    .labels-games-classes{
+        font-size: 14px;
+    }
+
+}
