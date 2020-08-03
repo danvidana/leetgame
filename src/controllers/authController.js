@@ -24,15 +24,9 @@ router.post("/signup",async (req,res,next)=>{
 // },config.secret,{
 //         expiresIn: 60*60*24
 //     })
+
      res.json({auth:true, token})
 })
-
-
-
-
-
-
-
 
 // Para que el usuario haga login
 router.post("/login",async (req,res,next)=>{
@@ -42,7 +36,22 @@ router.post("/login",async (req,res,next)=>{
     const user = await User.findOne({email:email});
     console.log(email,password)
     if (!user){
-        return res.status(404).send("The user does not exist")
+       // return res.status(404).send("The user does not exist")
+
+       const user = new User({
+        email: email,
+        password: password
+    });
+    
+   user.password = await user.encryptPassword(user.password);
+  await user.save();
+   const token =  jwt.sign({id:user._id ,
+                            idAdmin:true,
+},config.secret,{
+        expiresIn: 60*60*24
+    })
+    // res.json({auth:true, token})
+     res.redirect('/')
     }
     else {
       const valid =  await user.validatePassword(password)
