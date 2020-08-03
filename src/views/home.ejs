@@ -48,7 +48,15 @@
                     <% } %>
                 </div>
                 <div class="col">
-                    07/27/2020
+                    <% if (gameRecords[i].lastPlayed) { %>
+                        <%= gameRecords[i].lastPlayed.getMonth() + 1 %>
+                        /
+                        <%= gameRecords[i].lastPlayed.getDate() %>
+                        /
+                        <%= gameRecords[i].lastPlayed.getFullYear() %>
+                    <% }else { %>
+                        Game has not been played yet
+                    <% } %>
                 </div>
             </a>
             <%  }  %>

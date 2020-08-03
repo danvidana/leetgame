@@ -1,25 +1,30 @@
 <%- include ("./partials/_header", {gameRecordsCount: gameRecords.length}) %>
 
 
-<div class="container mt-5">
-<div class="row">
-    <div class="col stopwatch-col">
 
-        <div id="display" class="text-center">
+<div class="container" style="width: 100% !important; max-width: 100% !important;">
+<div class="row" style="height: 87vh;">
+    <div class="col stopwatch-col pt-5">
+        <h1 class="text-center mb-3 leetgame-red"><%= gameRecord.title %></h1>
+
+        <div id="display" class="text-center leetgame-red">
             00:00:00
         </div>
 
-        <div class="buttons text-center">
+        <div class="buttons text-center ">
             <button id="startStop" onclick="startStop()">Start</button>
             <button id="reset" onclick="reset()">Reset</button>
-            <button id="save" href="/saveTime/userId/saveTime()">Save</button>
+            <button class="btn btn-info" id="save" onclick="saveTime('<%= gameRecord.id %>')" >Save</button>
 
         </div>
 
-        <img class="game-image" src="/public/assets/game-placeholder.jpg" alt="" srcset="">
-        <h1 class="text-center"><%= gameRecord.title %></h1>
+        <div class="img-container text-center mt-3 pb-3">
+            <img class="game-image" src="/public/assets/game-placeholder.jpg" alt="" srcset="">
+        </div>
+        
+        
     </div>
-    <div class="col">
+    <div class="col pt-5">
         <div class="labels-games">
             Description
         </div>
@@ -36,7 +41,29 @@
             Date Started
         </div>
         <div id="time-played" class="text-label">
-            <%= gameRecord.dateStarted %>
+            <% if (gameRecord.dateStarted) { %>
+                <%= gameRecord.dateStarted.getMonth() + 1 %>
+                /
+                <%= gameRecord.dateStarted.getDate() %>
+                /
+                <%= gameRecord.dateStarted.getFullYear() %>
+            <% }else { %>
+                No start date
+            <% } %>
+        </div>
+        <div class="labels-games">
+            Last played:
+        </div>
+        <div class="text-label">
+            <% if (gameRecord.lastPlayed) { %>
+                <%= gameRecord.lastPlayed.getMonth() + 1 %>
+                /
+                <%= gameRecord.lastPlayed.getDate() %>
+                /
+                <%= gameRecord.lastPlayed.getFullYear() %>
+            <% }else { %>
+                Game hasn't been played yet
+            <% } %>
         </div>
 
     </div>

@@ -26,7 +26,6 @@ router.get('/home', verifyToken, async(req,res) =>{
     id = decoded.id;
     var timesFormated = [];
     const gameRecords = await GameRecord.find({userId: id});
-    console.log(gameRecords)
     for (var i = 0; i < gameRecords.length; i++) {
         timesFormated.push(secondsToTime(gameRecords[i].timePlayed));
     }
@@ -58,17 +57,19 @@ router.post('/add-game', verifyToken, async (req,res) =>{
     const gameRecord = new GameRecord(req.body);
     gameRecord.userId = id;
     gameRecord.timePlayed = 0;
-    console.log(req.body)
     gameRecord.estimatedCompletionTime = parseInt(req.body.estimatedCompletionTime)  * 360;
     gameRecord.dateStarted = new Date();
     await gameRecord.save();
     res.redirect('/home');
 });
 
-// Ruta para editar los datos
-router.get('/edit/:id',   async(req,res) =>{
+// Ruta para guardar el tiempo jugado de una sesion
+router.get('/saveTime/:id/:time', async (req,res) =>{
     const gameRecord = await GameRecord.findById(req.params.id);
-    res.render('edit', {gameRecord});
+    gameRecord.timePlayed = parseInt(gameRecord.timePlayed) + parseInt(req.params.time);
+    gameRecord.lastPlayed = new Date();
+    await gameRecord.save();
+    res.redirect('/home');
 })
 
 /*

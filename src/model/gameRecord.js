@@ -7,6 +7,7 @@ const GameRecordSchema  = Schema ({
     userId: String,
     timePlayed: Number,
     dateStarted: Date,
+    lastPlayed: Date,
     description: String,
     genre: String,
     estimatedCompletionTime: Number, 

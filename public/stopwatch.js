@@ -63,7 +63,7 @@ function startStop(){
     if(status === "stopped"){
 
         //Start the stopwatch (by calling the setInterval() function)
-        interval = window.setInterval(stopWatch, 100);
+        interval = window.setInterval(stopWatch, 1000);
         document.getElementById("startStop").innerHTML = "Stop";
         status = "started";
 
@@ -90,9 +90,13 @@ function reset(){
 
 }
 
-function saveTime() {
-    if (status !== "stopped") {
+function saveTime(gameRecordId) {
         console.log(seconds + (minutes * 60) + (hours * 360));
         startStop();
-    }
+        var url = "/saveTime/" + gameRecordId + "/" + (seconds + (minutes * 60) + (hours * 360));
+        seconds = 0;
+        minutes = 0;
+        hours = 0;
+        console.log(url);
+        document.location.href = url;
 }
